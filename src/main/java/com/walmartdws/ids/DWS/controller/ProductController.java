@@ -14,7 +14,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/allprodcts")
+    @GetMapping("/allproducts")
     public ResponseEntity<?> getAllProduct(){
         List<Product> lista = productService.getAllProduct();
         if(lista.isEmpty()){
@@ -23,9 +23,9 @@ public class ProductController {
         return ResponseEntity.ok().body(productService.getAllProduct());
     }
 
-    @GetMapping("/product/{barcode}")
-    public ResponseEntity<Product> getProductById(@PathVariable String barcode) {
-        return ResponseEntity.ok().body(productService.getProductByBarcode(barcode));
+    @GetMapping("/product/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable long id) {
+        return ResponseEntity.ok().body(productService.getProductByBarcode(id));
     }
 
     @PostMapping("/newproduct")
@@ -33,29 +33,16 @@ public class ProductController {
         return ResponseEntity.ok().body(this.productService.createProduct(product));
     }
 
-    @PutMapping("/update/{barcode}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable String barcode, @RequestBody Product product) {
         product.setBarcode(barcode);
         return ResponseEntity.ok().body(this.productService.updateProduct(product));
     }
 
-    @DeleteMapping("/delete/{barcode}")
-    public HttpStatus deleteProduct(@PathVariable String barcode) {
-        this.productService.deleteProduct(barcode);
+    @DeleteMapping("/delete/{id}")
+    public HttpStatus deleteProduct(@PathVariable long id) {
+        this.productService.deleteProduct(id);
         return HttpStatus.OK;
     }
-
-    /*@GetMapping("/API")
-    public Object getAPI() throws URISyntaxException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        URI uri = new URI("https://hello-world-rest-api-master.azurewebsites.net/dws");
-        Object forObject = new Object();
-        HttpEntity<Object> httpEntity = new HttpEntity<>(forObject, headers);
-        RestTemplate restTemplate = new RestTemplate();
-        String object = (String) restTemplate.postForObject(uri, httpEntity, Object.class);
-        return object;
-    }*/
-
 
 }

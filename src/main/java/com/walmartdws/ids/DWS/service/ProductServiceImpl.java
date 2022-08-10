@@ -28,14 +28,14 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product getProductByBarcode(String barcode) {
-        Optional<Product> productDb = this.productRepository.findById(barcode);
+    public Product getProductByBarcode(long id) {
+        Optional<Product> productDb = this.productRepository.findById(id);
         return productDb.get();
     }
 
     @Override
     public Product updateProduct(Product product) {
-        Optional<Product> productDb = this.productRepository.findById(product.getBarcode());
+        Optional<Product> productDb = this.productRepository.findById(product.getId());
 
         Product productUpdate = productDb.get();
         productUpdate.setBarcode(product.getBarcode());
@@ -49,8 +49,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteProduct(String barcode) {
-        Optional<Product> productDb = this.productRepository.findById(barcode);
+    public void deleteProduct(long id) {
+        Optional<Product> productDb = this.productRepository.findById(id);
         this.productRepository.delete(productDb.get());
     }
 }

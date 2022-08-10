@@ -10,9 +10,9 @@ public interface ProductService {
 
     List<Product> getAllProduct();
 
-    Product getProductByBarcode(String barcode);
+    Product getProductByBarcode(long id);
 
     Product updateProduct(Product product);
 
-    void deleteProduct(String barcode);
+    void deleteProduct(long id);
 }
