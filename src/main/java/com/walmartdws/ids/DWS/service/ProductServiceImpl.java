@@ -5,6 +5,7 @@ import com.walmartdws.ids.DWS.model.Product;
 import com.walmartdws.ids.DWS.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService{
-
     @Autowired
     private ProductRepository productRepository;
 
@@ -65,5 +65,13 @@ public class ProductServiceImpl implements ProductService{
         } else {
             throw new ResourceNotFoundException("Record not found with id : " + barcode);
         }
+    }
+
+    @Override
+    public Product postApi() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://hello-world-rest-api-master.azurewebsites.net/dws";
+        Product product = restTemplate.postForObject(url, "", Product.class);
+        return productRepository.save(product);
     }
 }

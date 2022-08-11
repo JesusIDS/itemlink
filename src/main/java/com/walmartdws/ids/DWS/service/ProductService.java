@@ -15,4 +15,6 @@ public interface ProductService {
     Product updateProduct(Product product);
 
     void deleteProduct(String barcode);
+
+    Product postApi();
 }

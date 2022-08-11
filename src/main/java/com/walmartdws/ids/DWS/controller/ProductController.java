@@ -1,10 +1,15 @@
 package com.walmartdws.ids.DWS.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.walmartdws.ids.DWS.model.Product;
 import com.walmartdws.ids.DWS.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.testng.annotations.BeforeClass;
+
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -43,6 +48,11 @@ public class ProductController {
     public HttpStatus deleteProduct(@PathVariable String barcode) {
         this.productService.deleteProduct(barcode);
         return HttpStatus.OK;
+    }
+
+    @PostMapping(value = "/API")
+    private ResponseEntity<Product> getApi() {
+        return ResponseEntity.ok().body(this.productService.postApi());
     }
 
 }
