@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 // Con @Repository le indico los metodos principales select, create, update, delete
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, String> {
 }

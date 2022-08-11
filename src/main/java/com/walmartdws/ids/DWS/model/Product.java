@@ -6,22 +6,15 @@ import javax.persistence.*;
 @Table(name = "products")
 public class Product {
 
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private long id;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
     private String barcode;
     private String weight;
     private String lenght;
     private String width;
     private String height;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getBarcode() {
         return barcode;
